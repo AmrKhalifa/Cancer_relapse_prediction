@@ -20,13 +20,14 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
 
 def my_kernel(X, Y):
 
-    K = np.zeros((X.shape[0],Y.shape[0]))
-    for i in range (X.shape[0]):
-        for j in range (Y.shape[0]):
-            K[i][j] = normalized_mutual_info_score(X[i], Y[j])
-    print(K)
+    # K = np.zeros((X.shape[0],Y.shape[0]))
+    # for i in range (X.shape[0]):
+    #     for j in range (Y.shape[0]):
+    #         K[i][j] = normalized_mutual_info_score(X[i], Y[j])
+    # print(K)
 
     return np.dot(X,Y.T)
+
 
 
 h = .02  # step size in the mesh
