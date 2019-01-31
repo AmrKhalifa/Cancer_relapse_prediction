@@ -13,4 +13,9 @@ The following models were tesed:<br />
 7- Naive bayes <br />
 8- PCA <br />
 9- Extra tree <br />
-and a voting classifier was chosen in the end. 
+and a voting classifier was chosen in the end.
+
+we use different feature selection techniques including: 
+Mutual information feature selection. 
+Correlation matrix. 
+Variannce threshold. 
