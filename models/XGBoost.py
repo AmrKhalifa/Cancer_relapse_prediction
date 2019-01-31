@@ -3,8 +3,6 @@ from sklearn.metrics import*
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 
-from sklearn.manifold import *
-
 
 x, y = data_reader.read_data()
 
@@ -16,11 +14,11 @@ for i in range (y.shape[0]):
     if y[i] == -1:
         y[i] =0
 
-#embedding = Isomap(n_components=3,n_neighbors=100)
-#x_transformed,error= locally_linear_embedding(x,n_components=100,n_neighbors=5)
-#embedding = SpectralEmbedding(n_components=100)
-#print(error)
-#x_transformed = embedding.fit_transform(x)
+# embedding = Isomap(n_components=1000,n_neighbors=100)
+# #x_transformed,error= locally_linear_embedding(x,n_components=100,n_neighbors=5)
+# #embedding = SpectralEmbedding(n_components=100)
+# #print(error)
+# x_transformed = embedding.fit_transform(x)
 
 
 

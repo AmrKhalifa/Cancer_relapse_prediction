@@ -30,10 +30,10 @@ x = (x-x.mean(axis=0))/x.std(axis=0)
 y = y.flatten()
 x = x.T
 
-for i in range(y.shape[0]):
-    if y[i] == -1:
-        y[i] =0
-
+# for i in range(y.shape[0]):
+#     if y[i] == -1:
+#         y[i] =0
+#
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.3)
 
