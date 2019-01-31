@@ -2,16 +2,21 @@ import data_reader
 from sklearn.metrics import*
 from sklearn.model_selection import train_test_split
 import numpy as np
-from sklearn.feature_selection import *
 from sklearn.linear_model import LogisticRegression
 from matplotlib import pyplot
-
+from sklearn.feature_selection import VarianceThreshold
 
 x, y = data_reader.read_data()
 
 x = (x-x.mean(axis = 0))/x.std(axis=0)
 y = y.flatten()
 x = x.T
+
+print (x.shape)
+sel = VarianceThreshold(threshold=(.05 * (1 - .05)))
+x = sel.fit_transform(x)
+
+print(x.shape)
 
 for i in range (y.shape[0]):
     if y[i] == -1:
@@ -31,7 +36,7 @@ for i in range (y.shape[0]):
         y[i] =0
 
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.3)
 
 
 # fit a model
