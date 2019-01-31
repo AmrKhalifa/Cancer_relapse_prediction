@@ -10,7 +10,7 @@ x = x.T
 for i in range (y.shape[0]):
     if y[i] == -1:
         y[i] =0
-
+y = y[::-1]
 
 embedding = Isomap(n_components=2,n_neighbors=1)
 

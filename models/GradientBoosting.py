@@ -7,8 +7,9 @@ from sklearn.tree import *
 
 x, y = data_reader.read_data()
 
-#x = (x-x.mean(axis = 0))/x.std(axis=0)
+x = (x-x.mean(axis = 0))/x.std(axis=0)
 y = y.flatten()
+
 x = x.T
 
 for i in range (y.shape[0]):
