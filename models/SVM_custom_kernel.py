@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.feature_selection import *
 x, y = data_reader.read_data()
 
-#x = (x-x.mean(axis = 0))/x.std(axis=0)
+x = (x-x.mean(axis = 0))/x.std(axis=0)
 y = y.flatten()
 x = x.T
 
@@ -33,12 +33,13 @@ def my_kernel(X, Y):
 h = .02  # step size in the mesh
 
 # we create an instance of SVM and fit out data.
-clf = svm.SVC(kernel=my_kernel)
+clf = svm.SVC(kernel=my_kernel, probability=True)
 clf.fit(x_train, y_train)
 
 y_pred = clf.predict(x_test)
 
 accuracy = accuracy_score(y_test, y_pred)
+
 auc = roc_auc_score(y_test, y_pred)
 
 print(y_pred)
