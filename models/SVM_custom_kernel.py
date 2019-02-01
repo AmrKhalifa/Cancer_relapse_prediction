@@ -3,8 +3,10 @@ from sklearn.metrics import*
 from sklearn.model_selection import train_test_split
 from sklearn  import svm
 import numpy as np
+from sklearn.model_selection import cross_val_score as cvs, RandomizedSearchCV
+
 from sklearn.feature_selection import *
-x, y = data_reader.read_data()
+x, y, z = data_reader.read_data()
 
 x = (x-x.mean(axis = 0))/x.std(axis=0)
 y = y.flatten()
@@ -35,6 +37,14 @@ h = .02  # step size in the mesh
 # we create an instance of SVM and fit out data.
 clf = svm.SVC(kernel=my_kernel, probability=True)
 clf.fit(x_train, y_train)
+
+
+
+score = cvs(clf,x_train,y_train,cv = 5,scoring='accuracy')
+score = score.mean()
+auc1 =  cvs(clf,x_train,y_train,cv = 5,scoring='roc_auc')
+print('score = {0}'.format(score))
+print('auc = {0}'.format(auc1.mean()))
 
 y_pred = clf.predict(x_test)
 

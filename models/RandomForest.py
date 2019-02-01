@@ -10,14 +10,17 @@ xtrain = xtrain.T
 ytrain = ytrain.reshape(-1,)
 N, D = xtrain.shape
 
+#rf_best = RandomForestClassifier (bootstrap =  False, min_samples_leaf =  1, n_estimators =  488, max_features =  'sqrt', min_samples_split= 10, max_depth = 90)
 clf = RandomForestClassifier(n_estimators=600,random_state=0)
 clf.fit(xtrain,ytrain)
 
 ypredict = clf.predict(xtrain)
 train_error = (ypredict != ytrain).mean()
 score = cvs(clf, xtrain, ytrain, cv=5, scoring='accuracy')
+roc_auc_score = cvs(clf, xtrain, ytrain, cv=5, scoring='accuracy')
+print ('roc_auc_score = {0}'.format(roc_auc_score.mean()))
 print ('score = {0}'.format(score.mean()))
-print ('train_error = {0}'.format(train_error))
+# print ('train_error = {0}'.format(train_error))
 
 
 #hyperparameters tunining
@@ -53,24 +56,16 @@ score  = cvs(rf_random, xtrain, ytrain, cv=5, scoring='accuracy')
 print ('score = {0}'.format(score.mean()))
 print ('roc_auc_score = {0}'.format(roc_auc_score.mean()))
 
-# rf_random.fit(xtrain,ytrain)
-# print(rf_random.best_params_)
+rf_random.fit(xtrain,ytrain)
+print(rf_random.best_params_)
 
-#rf_best = RandomForestClassifier (bootstrap =  False, min_samples_leaf =  1, n_estimators =  488, max_features =  'sqrt', min_samples_split= 10, max_depth = 90)
+rf_best = RandomForestClassifier (bootstrap =  False, min_samples_leaf =  1, n_estimators =  488, max_features =  'sqrt', min_samples_split= 10, max_depth = 90)
 
-#rf_best.fit(xtrain, ytrain)
+rf_best.fit(xtrain, ytrain)
 
-#ypredict = rf_best.predict(xtrain)
-#train_error = (ypredict != ytrain).mean()
-#score = cvs(rf_best, xtrain, ytrain, cv=5, scoring='roc_auc')
-#roc_auc_score = cvs(rf_best, xtrain, ytrain, cv=5, scoring='accuracy')
-#print ('score = {0}'.format(score.mean()))
-#print ('roc_auc_score = {0}'.format(roc_auc_score.mean()))
-
-
-# probs = rf_best.predict_proba(xtrain)
-# probs = probs[:, 1]
-# auc = roc_auc_score(ytrain, probs)
-
-# print(auc)
-#6521416153
+ypredict = rf_best.predict(xtrain)
+train_error = (ypredict != ytrain).mean()
+score = cvs(rf_best, xtrain, ytrain, cv=5, scoring='roc_auc')
+roc_auc_score = cvs(rf_best, xtrain, ytrain, cv=5, scoring='accuracy')
+print ('score = {0}'.format(score.mean()))
+print ('roc_auc_score = {0}'.format(roc_auc_score.mean()))
