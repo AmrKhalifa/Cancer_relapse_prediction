@@ -7,8 +7,8 @@ from sklearn.feature_selection import VarianceThreshold
 
 import numpy as np
 
-for i in range (100):
-    np.random.seed(i)
+for j in range (37):
+    np.random.seed(j)
 
     x, y = data_reader.read_data()
 
@@ -17,7 +17,7 @@ for i in range (100):
     x = x.T
 
     print(x.shape)
-    sel = VarianceThreshold(threshold=(.9 * (1 - .5)))
+    sel = VarianceThreshold(threshold=(.05 * (1 - .05)))
     x = sel.fit_transform(x)
 
     print(x.shape)
@@ -44,7 +44,7 @@ for i in range (100):
 
 
     # fit a model
-    model = LogisticRegression(C=1.0, solver='newton-cg')
+    model = LogisticRegression(C=5.0, solver='newton-cg')
     model.fit(x_train, y_train)
     # predict probabilities
     probs = model.predict_proba(x_test)
@@ -58,6 +58,7 @@ for i in range (100):
     fpr, tpr, thresholds = roc_curve(y_test, probs)
     print(y_test)
     pyplot.plot([0, 1], [0, 1], linestyle='--')
-    pyplot.plot(fpr, tpr)
+    pyplot.plot(fpr, tpr,label = str(j)+"  "+str(auc))
+    pyplot.legend()
 pyplot.show()
 
