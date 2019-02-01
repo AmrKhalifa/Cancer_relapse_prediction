@@ -14,15 +14,15 @@ for i in range (y.shape[0]):
     if y[i] == -1:
         y[i] =0
 
-# embedding = Isomap(n_components=1000,n_neighbors=100)
-# #x_transformed,error= locally_linear_embedding(x,n_components=100,n_neighbors=5)
+embedding = Isomap(n_components=120,n_neighbors=100)
+#x_transformed,error= locally_linear_embedding(x,n_components=100,n_neighbors=5)
 # #embedding = SpectralEmbedding(n_components=100)
 # #print(error)
-# x_transformed = embedding.fit_transform(x)
+x_transformed = embedding.fit_transform(x)
 
 
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+x_train, x_test, y_train, y_test = train_test_split(x_transformed, y, test_size=0.3)
 
 
 bst = XGBClassifier(max_depth=10000, learning_rate=0.1, n_estimators=500, silent=True, objective='binary:logistic', booster='gbtree', n_jobs=1, nthread=4, gamma=0.01, min_child_weight=1, max_delta_step=0, subsample=1, colsample_bytree=1, colsample_bylevel=1, reg_alpha=0, reg_lambda=1, scale_pos_weight=1, base_score=0.5, random_state=0, seed=None, missing=None)
